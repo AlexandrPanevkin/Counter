@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  height: 765px;
+  width:100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .App-logo {
@@ -35,4 +42,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Counter {
+  font-weight: bold;
+  border: 3px solid deepskyblue;
+  border-radius: 5%;
+  width: 325px;
+  height: 250px;
 }
