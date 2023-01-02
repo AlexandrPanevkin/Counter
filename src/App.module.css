@@ -51,3 +51,12 @@
   width: 325px;
   height: 250px;
 }
+
+.Settings {
+  font-weight: bold;
+  border: 3px solid deepskyblue;
+  border-radius: 5%;
+  width: 325px;
+  height: 250px;
+  margin-right: 100px;
+}

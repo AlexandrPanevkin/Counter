@@ -1,17 +1,18 @@
 .CounterValue {
     display: flex;
-    background-color: deepskyblue;
+    border: 3px solid deepskyblue;
     margin: 15px;
     height: 125px;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
     font-size: 60px;
+    color: deepskyblue
 }
 
 .CounterRedValue {
     display: flex;
-    background-color: deepskyblue;
+    border: 3px solid deepskyblue;
     margin: 15px;
     height: 125px;
     border-radius: 10px;
@@ -54,4 +55,9 @@
 :disabled {
     background-color: rgba(17, 165, 255, 0.4);
     color: black
+}
+
+button:active {
+    background-color: #282c34;
+    color: deepskyblue;
 }

@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import s from './App.module.css'
-import {Counter} from "./Counter";
+import {Counter} from "./Components/Counter";
+import {Settings} from "./Components/Settings";
 
 export type CounterValueType = 0 | 1 | 2 | 3 | 4 | 5
 
 function App() {
-    let [counterValue, setCounterValue] = useState<CounterValueType>(0)
+    const [counterValue, setCounterValue] = useState<CounterValueType>(0)
+
+    const [minValue, setMinValue] = useState(0)
 
 
     const increaseCounterValue = (incValue: CounterValueType) => {
@@ -28,13 +31,14 @@ function App() {
 
     return (
         <div className={s.App}>
+            <div className={s.Settings}>
+                <Settings counterValue={counterValue}/>
+            </div>
             <div className={s.Counter}><Counter
                 counterValue={counterValue}
                 increaseCounterValue={increaseCounterValue}
                 resetCounterValue={resetCounterValue}
             /></div>
-
-
         </div>
     );
 }
