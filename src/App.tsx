@@ -3,41 +3,57 @@ import s from './App.module.css'
 import {Counter} from "./Components/Counter";
 import {Settings} from "./Components/Settings";
 
-export type CounterValueType = 0 | 1 | 2 | 3 | 4 | 5
+export type CounterValueType = number | string
 
 function App() {
     const [counterValue, setCounterValue] = useState<CounterValueType>(0)
+    const [startValue, setStartValue] = useState(0)
+    const [maxValue, setMaxValue] = useState(5)
+    const [error, setError] = useState(false)
 
-    const [minValue, setMinValue] = useState(0)
-
-
-    const increaseCounterValue = (incValue: CounterValueType) => {
-        if (incValue === 0) {
-            setCounterValue(1)
-        } else if (incValue === 1) {
-            setCounterValue(2)
-        } else if (incValue === 2) {
-            setCounterValue(3)
-        } else if (incValue === 3) {
-            setCounterValue(4)
-        } else if (incValue === 4) {
-            setCounterValue(5)
+    const setSettingsMaxValue = (value: number) => {
+        if(value<= startValue || value<=0) {
+            setError(true)
+        } else {
+            setError(false)
         }
+        setMaxValue(value)
+        setCounterValue("enter values and press 'set' ")
+    }
+    console.log(error)
+    const setSettingsStartValue = (value: number) => {
+        setCounterValue("enter values and press 'set' ")
+        setStartValue(value)
+
+    }
+
+    const setSettingsCounterValue = () => {
+        setCounterValue(startValue)
+    }
+
+    const increaseCounterValue = (incValue: number) => {
+        return incValue >= startValue && incValue <= maxValue ? setCounterValue(incValue + 1) : counterValue
+
     }
 
     const resetCounterValue = () => {
-        setCounterValue(0)
+        setCounterValue(startValue)
     }
 
     return (
         <div className={s.App}>
             <div className={s.Settings}>
-                <Settings counterValue={counterValue}/>
+                <Settings setSettingsMaxValue={setSettingsMaxValue} setSettingsStartValue={setSettingsStartValue}
+                          startValue={startValue} maxValue={maxValue} counterValue={counterValue}
+                          setSettingsCounterValue={setSettingsCounterValue}
+                />
             </div>
             <div className={s.Counter}><Counter
                 counterValue={counterValue}
                 increaseCounterValue={increaseCounterValue}
                 resetCounterValue={resetCounterValue}
+                startValue={startValue}
+                maxValue={maxValue}
             /></div>
         </div>
     );

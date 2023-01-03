@@ -1,5 +1,6 @@
 .settingsValue {
     display: flex;
+    flex-direction: column;
     border: 3px solid deepskyblue;
     margin: 15px;
     height: 125px;
@@ -25,4 +26,26 @@
     background-color: deepskyblue;
     font-weight: bold;
     border-radius: 10px;
+}
+
+.inputBox {
+    display: flex;
+    padding: 0;
+    margin: 10px;
+}
+
+.inputValue {
+    padding-left: 30px;
+}
+
+.input {
+    width: 110px;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+input:focus {
+    outline: 2px solid deepskyblue;
 }

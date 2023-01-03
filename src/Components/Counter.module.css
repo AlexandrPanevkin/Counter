@@ -10,6 +10,18 @@
     color: deepskyblue
 }
 
+.textCounterValue {
+    display: flex;
+    border: 3px solid deepskyblue;
+    margin: 15px;
+    height: 125px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: deepskyblue
+}
+
 .CounterRedValue {
     display: flex;
     border: 3px solid deepskyblue;
@@ -31,29 +43,21 @@
     justify-content: space-around;
 }
 
-.incValue {
-    font-size: 40px;
-    cursor: pointer;
-    background-color: deepskyblue;
-    font-weight: bold;
-    border-radius: 10px;
-}
-
-.resetValue {
-    font-size: 40px;
-    cursor: pointer;
-    background-color: deepskyblue;
-    font-weight: bold;
-    border-radius: 10px;
-}
-
 .incResetValue {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-:disabled {
-    background-color: rgba(17, 165, 255, 0.4);
+.button {
+    font-size: 40px;
+    cursor: pointer;
+    background-color: deepskyblue;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+button:disabled {
+    opacity: 0.17;
     color: black
 }
 
