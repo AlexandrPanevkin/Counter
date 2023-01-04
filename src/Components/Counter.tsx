@@ -9,6 +9,7 @@ type CounterPropsType = {
     resetCounterValue: () => void
     startValue: number
     maxValue: number
+    error: boolean
 }
 
 export const Counter = (props: CounterPropsType) => {
@@ -21,13 +22,16 @@ export const Counter = (props: CounterPropsType) => {
 
     return (
         <div>
-            <div className={props.counterValue === props.maxValue ? s.CounterRedValue : typeof props.counterValue === 'string' ? s.textCounterValue : s.CounterValue}>
-                {props.counterValue}
+            <div
+                className={props.counterValue === props.maxValue ? s.CounterRedValue : props.error ? s.CounterTextError : typeof props.counterValue === 'string' ? s.textCounterValue : s.CounterValue}>
+                {props.error ? <div>Incorrect value!</div> : props.counterValue}
             </div>
             <div className={s.incResetBox}>
-                <Button disabled={props.counterValue === props.maxValue || typeof props.counterValue === 'string'}  onClickCallback={incOnClickHandler}
+                <Button disabled={props.counterValue === props.maxValue || typeof props.counterValue === 'string'}
+                        onClickCallback={incOnClickHandler}
                         buttonName={'inc'}/>
-                <Button disabled={props.counterValue === props.startValue || typeof props.counterValue === 'string'} onClickCallback={resetOnClickHandler}
+                <Button disabled={props.counterValue === props.startValue || typeof props.counterValue === 'string'}
+                        onClickCallback={resetOnClickHandler}
                         buttonName={'reset'}/>
             </div>
         </div>

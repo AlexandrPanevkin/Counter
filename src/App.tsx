@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './App.module.css'
 import {Counter} from "./Components/Counter";
 import {Settings} from "./Components/Settings";
@@ -6,13 +6,14 @@ import {Settings} from "./Components/Settings";
 export type CounterValueType = number | string
 
 function App() {
-    const [counterValue, setCounterValue] = useState<CounterValueType>(0)
+
     const [startValue, setStartValue] = useState(0)
+    const [counterValue, setCounterValue] = useState<CounterValueType>(startValue)
     const [maxValue, setMaxValue] = useState(5)
     const [error, setError] = useState(false)
 
     const setSettingsMaxValue = (value: number) => {
-        if(value<= startValue || value<=0) {
+        if (value <= startValue || value <= 0) {
             setError(true)
         } else {
             setError(false)
@@ -20,16 +21,44 @@ function App() {
         setMaxValue(value)
         setCounterValue("enter values and press 'set' ")
     }
-    console.log(error)
     const setSettingsStartValue = (value: number) => {
-        setCounterValue("enter values and press 'set' ")
+        if (value >= maxValue || value < 0) {
+            setError(true)
+        } else {
+            setError(false)
+        }
         setStartValue(value)
-
+        setCounterValue("enter values and press 'set' ")
     }
 
     const setSettingsCounterValue = () => {
         setCounterValue(startValue)
     }
+
+    useEffect(() => {
+        let valueAsString = localStorage.getItem('startValue')
+        if (valueAsString) {
+            let newValue = JSON.parse(valueAsString)
+            setStartValue(newValue)
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('startValue', JSON.stringify(startValue))
+    }, [startValue])
+
+    useEffect(() => {
+        let valueAsString = localStorage.getItem('maxValue')
+        if (valueAsString) {
+            let newValue = JSON.parse(valueAsString)
+            setMaxValue(newValue)
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('maxValue', JSON.stringify(maxValue))
+    }, [maxValue])
+
 
     const increaseCounterValue = (incValue: number) => {
         return incValue >= startValue && incValue <= maxValue ? setCounterValue(incValue + 1) : counterValue
@@ -46,6 +75,8 @@ function App() {
                 <Settings setSettingsMaxValue={setSettingsMaxValue} setSettingsStartValue={setSettingsStartValue}
                           startValue={startValue} maxValue={maxValue} counterValue={counterValue}
                           setSettingsCounterValue={setSettingsCounterValue}
+                          error={error}
+                          setCounterValue={setCounterValue}
                 />
             </div>
             <div className={s.Counter}><Counter
@@ -54,6 +85,7 @@ function App() {
                 resetCounterValue={resetCounterValue}
                 startValue={startValue}
                 maxValue={maxValue}
+                error={error}
             /></div>
         </div>
     );

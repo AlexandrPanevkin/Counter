@@ -34,6 +34,18 @@
     color: #c70f0f
 }
 
+.CounterTextError {
+    display: flex;
+    border: 3px solid deepskyblue;
+    margin: 15px;
+    height: 125px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #c70f0f
+}
+
 .incResetBox {
     display: flex;
     border: 3px solid deepskyblue;
@@ -54,6 +66,7 @@
     background-color: deepskyblue;
     font-weight: bold;
     border-radius: 10px;
+    transition: all 0.15s ease-in-out;
 }
 
 button:disabled {
