@@ -13,20 +13,12 @@ function App() {
     const [error, setError] = useState(false)
 
     const setSettingsMaxValue = (value: number) => {
-        if (value <= startValue || value <= 0) {
-            setError(true)
-        } else {
-            setError(false)
-        }
+        value <= startValue || value <= 0 ? setError(true) : setError(false)
         setMaxValue(value)
         setCounterValue("enter values and press 'set' ")
     }
     const setSettingsStartValue = (value: number) => {
-        if (value >= maxValue || value < 0) {
-            setError(true)
-        } else {
-            setError(false)
-        }
+        value >= maxValue || value < 0 ? setError(true) : setError(false)
         setStartValue(value)
         setCounterValue("enter values and press 'set' ")
     }
@@ -40,6 +32,7 @@ function App() {
         if (valueAsString) {
             let newValue = JSON.parse(valueAsString)
             setStartValue(newValue)
+            setCounterValue(newValue)
         }
     }, [])
 
