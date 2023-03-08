@@ -69,12 +69,13 @@
     transition: all 0.15s ease-in-out;
 }
 
-button:disabled {
-    opacity: 0.17;
-    color: black
-}
-
 button:active {
     background-color: #282c34;
     color: deepskyblue;
+}
+
+button:disabled {
+    background-color: deepskyblue;
+    opacity: 0.17;
+    color: black
 }

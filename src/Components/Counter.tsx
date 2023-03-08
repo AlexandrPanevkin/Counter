@@ -1,10 +1,9 @@
 import React from 'react';
-import {CounterValueType} from "../App";
 import s from './Counter.module.css'
 import {Button} from "./Button";
 
 type CounterPropsType = {
-    counterValue: CounterValueType
+    counterValue: number | string
     increaseCounterValue: (incValue: number) => void
     resetCounterValue: () => void
     startValue: number

@@ -10,10 +10,10 @@ type SettingsPropsType = {
     setSettingsStartValue: (value: number) => void
     setSettingsCounterValue: () => void
     error: boolean
-    setCounterValue: (counterValue: number | string) => void
 }
 
 export const Settings = (props: SettingsPropsType) => {
+
     const onInputMaxChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.setSettingsMaxValue(+e.currentTarget.value)
     }
@@ -51,7 +51,7 @@ export const Settings = (props: SettingsPropsType) => {
             </div>
             <div className={s.setBox}>
                 <Button onClickCallback={onClickSetValueHandler} buttonName={'set'}
-                        disabled={typeof props.counterValue === 'number' || props.error}/>
+                        disabled={ props.error}/>
             </div>
         </div>
     )
