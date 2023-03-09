@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import s from './App.module.css'
 import {Counter} from "./Components/Counter";
 import {Settings} from "./Components/Settings";
@@ -24,16 +24,11 @@ function App() {
     let counter = useSelector<AppRootStateType, stateType>(state => state.counter)
     const dispatch = useDispatch()
 
-    const [error, setError] = useState(false)
-
     const setSettingsStartValue = (value: number) => {
-        debugger
-        // value >= maxValue || value < 0 ? setError(true) : setError(false)
         dispatch(setSettingsStartValueAC(value))
     }
 
     const setSettingsMaxValue = (value: number) => {
-        // value <= startValue || value <= 0 ? setError(true) : setError(false)
         dispatch(setSettingsMaxValueAC(value))
     }
 
@@ -50,9 +45,9 @@ function App() {
         dispatch(resetCounterValueAC())
     }
 
-    useEffect(() => {
-            dispatch(setErrorAC())
-    }, [counter.startValue, counter.maxValue])
+    // useEffect(() => {
+    //         dispatch(setErrorAC())
+    // }, [counter.startValue, counter.maxValue])
 
     // useEffect(() => {
     //     let valueAsString = localStorage.getItem('startValue')
@@ -86,7 +81,7 @@ function App() {
                           startValue={counter.startValue} maxValue={counter.maxValue}
                           counterValue={counter.counterValue}
                           setSettingsCounterValue={setSettingsCounterValue}
-                          error={error}
+                          error={counter.error}
                 />
             </div>
             <div className={s.Counter}>
@@ -96,7 +91,7 @@ function App() {
                     resetCounterValue={resetCounterValue}
                     startValue={counter.startValue}
                     maxValue={counter.maxValue}
-                    error={error}
+                    error={counter.error}
                 />
             </div>
         </div>

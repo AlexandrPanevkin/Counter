@@ -1,4 +1,5 @@
 import {stateType} from "../AppRed";
+import {Simulate} from "react-dom/test-utils";
 
 const initialState: stateType = {
     startValue: 0,
@@ -11,10 +12,14 @@ export const counterReducer = (state = initialState, action: counterReducerType)
     switch (action.type) {
 
         case "SET-SETTINGS-START-VALUE": {
-            return {...state, startValue: action.value, counterValue: "enter values and press 'set' "}
+            if(action.value >= state.maxValue || action.value < 0) {
+               return {...state, startValue: action.value, error: true}
+            } else return {...state, startValue: action.value, counterValue: "enter values and press 'set' ", error: false}
         }
         case "SET-SETTINGS-MAX-VALUE": {
-            return {...state, maxValue: action.value, counterValue: "enter values and press 'set' "}
+            if( action.value < state.startValue || action.value <= 0) {
+                return {...state, maxValue: action.value, error: true}
+            } else return {...state, maxValue: action.value, counterValue: "enter values and press 'set' ", error: false}
         }
         case "INCREASE-COUNTER-VALUE": {
             return {...state, counterValue: action.incValue + 1}
@@ -24,13 +29,6 @@ export const counterReducer = (state = initialState, action: counterReducerType)
         }
         case "SET-SETTINGS-COUNTER-VALUE": {
             return {...state, counterValue: state.startValue}
-        }
-        case "SET-ERROR": {
-            if (state.startValue > state.maxValue || (state.startValue | state.maxValue) < 0 || state.counterValue >= state.maxValue) {
-                return {...state, error: true}
-            } else {
-                return {...state, error: false}
-            }
         }
         default: {
             return state
@@ -72,6 +70,7 @@ export const setSettingsCounterValueAC = () => {
 }
 
 export type setErrorACType = ReturnType<typeof setErrorAC>
-export const setErrorAC = () => {
-    return {type: 'SET-ERROR'} as const
+export const setErrorAC = (value: number) => {
+    return {type: 'SET-ERROR', value} as const
 }
+
